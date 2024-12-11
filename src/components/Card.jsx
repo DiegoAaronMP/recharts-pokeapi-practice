@@ -2,7 +2,7 @@
 
 export const Card = () => {
   return (
-    <div className='relative bg-white rounded-md ring-1 ring-gray-200 shadow-sm'>
+    <div className='relative bg-white rounded-md ring-1 ring-gray-200 shadow-sm hover:scale-110 transition'>
       {/* Pokédex number */}
       <span className="absolute px-1.5 m-1.5 top-0 left-0 rounded-lg text-xs font-extrabold text-gray-600 bg-gray-200">
         #025
