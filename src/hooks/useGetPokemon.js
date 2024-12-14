@@ -5,9 +5,22 @@ export const useGetPokemon = () => {
 
     const getPokemon = async () => {
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon/ditto');
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
             const data = await response.json();
-            setPokemon(data);
+            const { results } = data;
+
+            const pokeArray = results.map(async (poke) => {
+                const response = await fetch(poke.url);
+                const data = await response.json();
+
+                return {
+                    id: data.id,
+                    name: data.name,
+                    sprite: data.sprites.front_default
+                }
+            });
+
+            setPokemon( await Promise.all(pokeArray) );
         } catch (error) {
             console.log(error);
         }
