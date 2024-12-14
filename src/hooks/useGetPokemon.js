@@ -13,6 +13,7 @@ export const useGetPokemon = () => {
                 const response = await fetch(poke.url);
                 const data = await response.json();
 
+                // TODO: Cambiar la imagen por el svg de Dream World
                 return {
                     id: data.id,
                     name: data.name,
@@ -20,6 +21,7 @@ export const useGetPokemon = () => {
                 }
             });
 
+            // TODO: Explicar que hace Promise.all
             setPokemon( await Promise.all(pokeArray) );
         } catch (error) {
             console.log(error);
