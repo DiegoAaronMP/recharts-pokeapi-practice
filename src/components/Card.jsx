@@ -10,7 +10,7 @@ export const Card = ({id, name, sprite}) => {
 
       <div className="flex justify-items-center items-center justify-between px-2.5 py-1.5">
         <p className='text-lg font-extrabold text-wrap'>{name}</p>
-        <img className='w-full max-w-20 z-10' src={sprite} alt="Pokémon artwork" />
+        <img className='w-full h-20 max-w-20 z-10' src={sprite} alt="Pokémon artwork" />
       </div>
     </div>
   )
