@@ -54,6 +54,7 @@ export const useGetPokemon = () => {
      * Función para obtener más Pokémon desde la siguiente página
      */
     const getMorePokemon = async () => {
+        if (!nextPage) return; // Evitar fetching si no tenemos una siguiente página
         const { next, pokeArray } = await(getPokemon(nextPage));
         setPokemon( prev => [...prev, ...pokeArray]);
         setNextPage(next);
