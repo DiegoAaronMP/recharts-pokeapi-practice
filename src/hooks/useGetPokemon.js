@@ -5,9 +5,12 @@ const DEFAULT_URL = 'https://pokeapi.co/api/v2/pokemon/';
 export const useGetPokemon = () => {
     const [pokemon, setPokemon] = useState([]);
     const [nextPage, setNextPage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const getPokemon = async (url = DEFAULT_URL) => {
         try {
+            setIsLoading(true);
+
             const response = await fetch(url);
             const data = await response.json();
             /**
@@ -38,6 +41,8 @@ export const useGetPokemon = () => {
             return { pokeArray, next };
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -70,6 +75,7 @@ export const useGetPokemon = () => {
 
     return {
         getMorePokemon,
+        isLoading,
         pokemon,
     };
 }
