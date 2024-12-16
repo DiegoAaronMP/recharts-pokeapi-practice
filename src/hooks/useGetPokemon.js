@@ -6,12 +6,18 @@ export const useGetPokemon = () => {
     const [pokemon, setPokemon] = useState([]);
     const [nextPage, setNextPage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const getPokemon = async (url = DEFAULT_URL) => {
         try {
+            setError(null)
             setIsLoading(true);
 
             const response = await fetch(url);
+            // Validación para ver si la respuesta fue exitosa
+            if (!response.ok) {
+                throw new Error('Failed to fetch the Pokémon data.')
+            }
             const data = await response.json();
             /**
              * results almacena los datos de los Pokémon
@@ -28,6 +34,10 @@ export const useGetPokemon = () => {
             const pokeArray = await Promise.all(
                 results.map(async (poke) => {
                     const response = await fetch(poke.url);
+                    // Validación para ver si la respuesta fue exitosa
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch the Pokémon data.')
+                    }
                     const data = await response.json();
 
                     return {
@@ -39,8 +49,9 @@ export const useGetPokemon = () => {
             );
 
             return { pokeArray, next };
-        } catch (error) {
-            console.log(error);
+        } catch (err) {
+            setError(err);
+            console.log(err);
         } finally {
             setIsLoading(false);
         }
@@ -74,6 +85,7 @@ export const useGetPokemon = () => {
     }, []);
 
     return {
+        error,
         getMorePokemon,
         isLoading,
         pokemon,
