@@ -9,7 +9,7 @@ export const useGetPokemon = () => {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            const { results } = data;
+            const { results, next } = data;
 
             /**
              * pokeArray va a almacenar un arreglo de promesas, por eso
@@ -29,17 +29,30 @@ export const useGetPokemon = () => {
                 })
             );
 
-            setPokemon( pokeArray );
+            return { pokeArray, next };
         } catch (error) {
             console.log(error);
         }
     }
 
+    const obtainPokemon = async () => {
+        const { pokeArray, next } = await getPokemon(); 
+        setPokemon(pokeArray);
+        setNextPage(next);
+    }
+
+    const morePokemon = async () => {
+        const { next, pokeArray } = await(getPokemon(nextPage));
+        setPokemon( prev => [...prev, ...pokeArray]);
+        setNextPage(next);
+    }
+
     useEffect(() => {
-        getPokemon();
+        obtainPokemon();
     }, []);
 
     return {
-        pokemon
+        morePokemon,
+        pokemon,
     };
 }

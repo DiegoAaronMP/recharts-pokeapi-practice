@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { Card } from "../components/Card"
 import { useGetPokemon } from "../hooks/useGetPokemon";
 
 export const HomePage = () => {
-    const {pokemon} = useGetPokemon();
+    const { pokemon } = useGetPokemon();
     
     return (
 
