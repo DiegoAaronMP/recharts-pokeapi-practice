@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+const DEFAULT_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
 export const useGetPokemon = () => {
     const [pokemon, setPokemon] = useState();
+    const [nextPage, setNextPage] = useState('');
 
-    const getPokemon = async () => {
+    const getPokemon = async (url = DEFAULT_URL) => {
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+            const response = await fetch(url);
             const data = await response.json();
             const { results } = data;
 
@@ -19,7 +21,6 @@ export const useGetPokemon = () => {
                     const response = await fetch(poke.url);
                     const data = await response.json();
 
-                    // TODO: Cambiar la imagen por el svg de Dream World
                     return {
                         id: data.id,
                         name: data.name,
