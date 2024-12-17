@@ -3,7 +3,7 @@ import { Loader } from '../components/Loader';
 import { useGetPokemon } from '../hooks/useGetPokemon';
 
 export const HomePage = () => {
-    const { pokemon } = useGetPokemon();
+    const { pokemon, isLoading } = useGetPokemon();
     
     return (
         <>
@@ -15,7 +15,8 @@ export const HomePage = () => {
                 }
             </div>
 
-            <Loader />
+            {/* Spinner de carga */}
+            { isLoading ? <Loader /> : '' }
         </>
     )
 }
