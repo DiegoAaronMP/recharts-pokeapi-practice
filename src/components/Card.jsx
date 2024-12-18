@@ -12,7 +12,7 @@ export const Card = ({ id, name, sprite }) => {
           #{id}
         </span>
         
-        <p className='text-lg font-extrabold text-wrap'>{name}</p>
+        <p className='text-lg font-extrabold text-wrap uppercase my-1.5'>{name}</p>
       </div>
 
     </div>
