@@ -7,7 +7,7 @@ export const HomePage = () => {
     
     return (
         <>
-            <div className='grid grid-cols-cards gap-4 m-6 md:mx-36'>
+            <div className='grid grid-cols-cards gap-4 m-6 lg:w-[1000px] lg:mx-auto'>
                 {
                     pokemon?.map(poke =>
                         <Card key={poke.id} {...poke} />
