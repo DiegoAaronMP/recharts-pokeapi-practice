@@ -8,7 +8,7 @@ export const Card = ({ id, name, sprite }) => {
 
         <img className='w-full h-20 max-w-20 z-10' src={sprite} alt="Pokémon artwork" />
 
-        <span className="px-1.5 m-1.5 top-0 left-0 rounded-lg text-xs font-extrabold text-gray-600 bg-gray-200">
+        <span className="px-2 rounded-lg tracking-wide text-xs font-extrabold text-gray-800 bg-gray-200">
           #{id}
         </span>
         
