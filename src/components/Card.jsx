@@ -6,13 +6,13 @@ export const Card = ({ id, name, sprite }) => {
 
       <div className='justify-items-center items-center justify-between px-2.5 py-1.5'>
 
-        <img className='w-full h-20 max-w-20 m-2 z-10' src={sprite} alt='Pokémon artwork' />
+        <img className='w-full h-20 max-w-20 mt-2 mb-1 z-10' src={sprite} alt='Pokémon artwork' />
 
         <span className='px-2 rounded-lg tracking-wide text-xs font-extrabold text-gray-800 bg-gray-200'>
           #{id}
         </span>
         
-        <p className='text-lg font-extrabold text-wrap uppercase my-1.5'>{name}</p>
+        <p className='text-lg font-extrabold text-wrap uppercase my-1'>{name}</p>
       </div>
 
     </div>
