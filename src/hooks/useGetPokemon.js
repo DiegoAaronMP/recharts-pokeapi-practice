@@ -44,7 +44,7 @@ export const useGetPokemon = () => {
                     return {
                         id: data.id,
                         name: data.name,
-                        sprite: data.sprites.other.dream_world.front_default
+                        sprite: data.sprites.other.dream_world.front_default || data.sprites.front_default
                     }
                 })
             );
