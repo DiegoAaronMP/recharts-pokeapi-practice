@@ -36,8 +36,15 @@ export const HomePage = () => {
                 }
             </div>
             
+            {/* Cuando se llega al final de la lista de Pokémon y ya no hay más para mostrar */}
+            {   !hasMorePokemon &&
+                <span className='flex justify-center my-6'>
+                    Ya no hay más Pokémon para mostrar
+                </span>
+            }
+
             {/* Spinner de carga */}
-            { isLoading ? <Loader /> : '' }
+            { isLoading && <Loader /> }
         </>
     )
 }
