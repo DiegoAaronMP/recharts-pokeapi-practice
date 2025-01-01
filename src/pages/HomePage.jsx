@@ -4,7 +4,10 @@ import { Loader } from '../components/Loader';
 import { useGetPokemon } from '../hooks/useGetPokemon';
 
 export const HomePage = () => {
-    const { pokemon, isLoading, getMorePokemon } = useGetPokemon();
+    const { pokemon,
+            isLoading,
+            getMorePokemon,
+            hasMorePokemon } = useGetPokemon();
 
     const observer = useRef();
     const lastPokemonCard = useCallback(card => {
@@ -13,13 +16,13 @@ export const HomePage = () => {
         if (observer.current) observer.current.disconnect();
 
         observer.current = new IntersectionObserver(entries => {
-            if (entries[0].isIntersecting) {
+            if (entries[0].isIntersecting && hasMorePokemon) {
                 getMorePokemon();
             }
         });
 
         if (card) observer.current.observe(card);
-    }, [isLoading, getMorePokemon]);
+    }, [isLoading, getMorePokemon, hasMorePokemon]);
 
     return (
         <>
@@ -32,7 +35,7 @@ export const HomePage = () => {
                     )
                 }
             </div>
-
+            
             {/* Spinner de carga */}
             { isLoading ? <Loader /> : '' }
         </>
