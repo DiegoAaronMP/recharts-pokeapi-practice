@@ -7,6 +7,7 @@ export const useGetPokemon = () => {
     const [nextPage, setNextPage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [hasMorePokemon, setHasMorePokemon] = useState(true);
 
     const getPokemon = async (url = DEFAULT_URL) => {
         try {
@@ -43,7 +44,7 @@ export const useGetPokemon = () => {
                     return {
                         id: data.id,
                         name: data.name,
-                        sprite: data.sprites.other.dream_world.front_default
+                        sprite: data.sprites.other.dream_world.front_default || data.sprites.front_default
                     }
                 })
             );
@@ -70,7 +71,7 @@ export const useGetPokemon = () => {
      * Función para obtener más Pokémon desde la siguiente página
      */
     const getMorePokemon = async () => {
-        if (!nextPage) return; // Evitar fetching si no tenemos una siguiente página
+        if (!nextPage) return setHasMorePokemon(false); // Evitar fetching si no tenemos una siguiente página
         const { next, pokeArray } = await(getPokemon(nextPage));
         setPokemon( prev => [...prev, ...pokeArray]);
         setNextPage(next);
@@ -87,6 +88,7 @@ export const useGetPokemon = () => {
     return {
         error,
         getMorePokemon,
+        hasMorePokemon,
         isLoading,
         pokemon,
     };
