@@ -10,17 +10,25 @@ export const HomePage = () => {
             hasMorePokemon } = useGetPokemon();
 
     const observer = useRef();
-    const lastPokemonCard = useCallback(card => {
-        if (isLoading) return;
 
+    // Función que gestiona el observador para el infinite scroll.
+    const lastPokemonCard = useCallback(card => {
+        if (isLoading) return; // Si ya estamos cargando datos, evitamos iniciar otra solicitud.
+
+        // Desconectamos el observador anterior, si existe, para evitar duplicados.
         if (observer.current) observer.current.disconnect();
 
+        // Creamos un nuevo observador utilizando IntersectionObserver API.
         observer.current = new IntersectionObserver(entries => {
+            // Revisamos si el primer elemento observado está visible en el viewport.
             if (entries[0].isIntersecting && hasMorePokemon) {
+                // Si está visible, solicitamos más datos de la API.
                 getMorePokemon();
             }
         });
 
+        // Si el elemento DOM asociado a la tarjeta existe,
+        // lo conectamos al nuevo observador.
         if (card) observer.current.observe(card);
     }, [isLoading, getMorePokemon, hasMorePokemon]);
 
