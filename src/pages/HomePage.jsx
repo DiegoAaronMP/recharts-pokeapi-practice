@@ -7,7 +7,8 @@ export const HomePage = () => {
     const { pokemon,
             isLoading,
             getMorePokemon,
-            hasMorePokemon } = useGetPokemon();
+            hasMorePokemon,
+            error } = useGetPokemon();
 
     const observer = useRef();
 
@@ -51,6 +52,14 @@ export const HomePage = () => {
                 </span>
             }
 
+            {/* Mostrar mensaje de error */}
+            {   !isLoading && error &&
+                <div className='justify-center my-6 mx-6 p-4 rounded-md ring-1 bg-red-100 ring-red-300'>
+                    <h2 className='font-semibold text-xl'>Ha ocurrido un error</h2>
+                    <p>Intente de nuevo recargando la página.</p>
+                </div>
+            }
+            
             {/* Spinner de carga */}
             { isLoading && <Loader /> }
         </>
