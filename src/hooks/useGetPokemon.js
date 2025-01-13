@@ -41,10 +41,18 @@ export const useGetPokemon = () => {
                     }
                     const data = await response.json();
 
+                    const stats = data?.stats.map( s => {
+                        return {
+                            name: s.stat.name,
+                            base: s.base_stat
+                        }
+                    })
+
                     return {
                         id: data.id,
                         name: data.name,
-                        sprite: data.sprites.other.dream_world.front_default || data.sprites.front_default
+                        sprite: data.sprites.other.dream_world.front_default || data.sprites.front_default,
+                        stats
                     }
                 })
             );
