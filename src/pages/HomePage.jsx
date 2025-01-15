@@ -1,7 +1,8 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Card } from '../components/Card'
 import { Loader } from '../components/Loader';
 import { useGetPokemon } from '../hooks/useGetPokemon';
+import { Modal } from '../components/Modal';
 
 export const HomePage = () => {
     const { pokemon,
@@ -9,6 +10,16 @@ export const HomePage = () => {
             getMorePokemon,
             hasMorePokemon,
             error } = useGetPokemon();
+
+    const [showModal, setShowModal] = useState({open: false, activePokemon: {}});
+
+    const openModal = (pokemon) => {
+        setShowModal({ open: true, activePokemon: pokemon});
+    }
+    
+    const closeModal = () => {
+        setShowModal({ open: false, activePokemon: {}});
+    }
 
     const observer = useRef();
 
@@ -39,11 +50,13 @@ export const HomePage = () => {
                 {
                     pokemon?.map((poke, index) =>
                         (pokemon.length === index + 1)
-                            ? <Card ref={lastPokemonCard} key={poke.id} {...poke} />
-                            : <Card key={poke.id} {...poke} />
+                            ? <Card ref={lastPokemonCard} key={poke.id} showModal={() => openModal(poke)} {...poke} />
+                            : <Card key={poke.id} showModal={() => openModal(poke)} {...poke} />
                     )
                 }
             </div>
+
+            <Modal {...showModal} close={closeModal} />
             
             {/* Cuando se llega al final de la lista de Pokémon y ya no hay más para mostrar */}
             {   !hasMorePokemon &&
