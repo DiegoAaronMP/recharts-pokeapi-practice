@@ -5,9 +5,11 @@ export const Modal = ({open, activePokemon, close}) => {
         {/* El stopPropagation sirve para que el evento onClick del padre no llegue a los hijos,
             en este caso se está utilizando para evitar que se cierre el modal al dar clic dentro
             del contenido/hijo */}
-        <div onClick={(e) => e.stopPropagation()} className="flex bg-white">
-            <img className='w-full h-20 max-w-20 mt-2 mb-1 z-10' src={activePokemon.sprite} alt='Pokémon artwork' />
-            <h2 className="font-bold uppercase">{activePokemon.name}</h2>
+        <div onClick={(e) => e.stopPropagation()} className="flex bg-white rounded-md w-full max-w-3xl max-h-full p-4 mx-4">
+            <div>
+              <img className='w-16 h-auto mt-2 mb-1 z-10' src={activePokemon.sprite} alt={`${activePokemon.name} artwork`} />
+              <h2 className="font-bold text-xl uppercase">{activePokemon.name}</h2>
+            </div>
         </div>
     </div>
   )
