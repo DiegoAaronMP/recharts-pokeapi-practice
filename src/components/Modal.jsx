@@ -28,25 +28,33 @@ export const Modal = ({ open, activePokemon, close }) => {
       {/* El stopPropagation sirve para que el evento onClick del padre no llegue a los hijos,
             en este caso se está utilizando para evitar que se cierre el modal al dar clic dentro
             del contenido/hijo */}
-      <div onClick={(e) => e.stopPropagation()} className="flex bg-white rounded-md w-full max-w-3xl max-h-full p-6 mx-4">
-        <div>
-          <h2 className="font-bold text-2xl uppercase">{activePokemon.name}</h2>
-          <img className='w-24 h-auto mt-4 mb-2 z-10' src={activePokemon.sprite} alt={`${activePokemon.name} artwork`} />
+      <div onClick={(e) => e.stopPropagation()} className="bg-white rounded-md w-full max-w-3xl max-h-full p-6 mx-4">
+
+        {/* Nombre del Pokémon */}
+        <h2 className="font-bold text-2xl uppercase">
+          <span className="opacity-70 mr-1.5">#{activePokemon.id} -</span>
+          {activePokemon.name}
+        </h2>
+
+        {/* Contenedor para la imagen y las gráficas */}
+        <div className="flex">
+          <img className='w-24 h-auto mx-4 z-10' src={activePokemon.sprite} alt={`${activePokemon.name} artwork`} />
+
+          {/* Gráfica de barras */}
+          <ResponsiveContainer width={'100%'} height={300} >
+            <BarChart
+              data={activePokemon.stats}
+              layout="vertical"
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" />
+              <YAxis dataKey="name" tickFormatter={formatStatsNames} type="category" />
+              <Tooltip labelFormatter={formatStatsNames} />
+              <Bar dataKey="base" fill="#205781" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* Gráfica de barras */}
-        <ResponsiveContainer width={'100%'} height={300} >
-          <BarChart
-            data={activePokemon.stats}
-            layout="vertical"
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number"/>
-            <YAxis dataKey="name" tickFormatter={formatStatsNames} type="category"/>
-            <Tooltip labelFormatter={formatStatsNames} />
-            <Bar dataKey="base" fill="#8884d8" />
-          </BarChart>
-        </ResponsiveContainer>
       </div>
     </div>
   )
