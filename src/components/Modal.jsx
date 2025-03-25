@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { formatStatsNames } from "../helpers/formatStatsNames";
+import { ResponsiveContainer } from "recharts";
+import { PokeBarChart } from "./charts/PokeBarChart";
 
 export const Modal = ({ open, activePokemon, close }) => {
 
@@ -42,16 +42,13 @@ export const Modal = ({ open, activePokemon, close }) => {
 
           {/* Gráfica de barras */}
           <ResponsiveContainer width={'100%'} height={300} >
-            <BarChart
-              data={activePokemon.stats}
-              layout="vertical"
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" tickFormatter={formatStatsNames} type="category" />
-              <Tooltip labelFormatter={formatStatsNames} />
-              <Bar dataKey="base" fill="#205781" />
-            </BarChart>
+            {/* Por alguna razón no es posible renderizar la gráfica como en la siguiente línea */}
+            {/* <PokeBarChart stats={activePokemon.stats} /> */}
+
+            {/* Para que se renderice, se debe de usar el componente como si fuese una función */}
+            {
+              PokeBarChart(activePokemon.stats)
+            }
           </ResponsiveContainer>
         </div>
 
