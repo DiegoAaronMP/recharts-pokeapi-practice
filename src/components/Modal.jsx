@@ -17,6 +17,10 @@ export const Modal = ({ open, activePokemon, close }) => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [close]);
 
+  // Para evitar renderizar el modal si no está abierto
+  if (!open) {
+    return null;
+  }
 
   return (
     <div onClick={close} className={`fixed inset-0 bg-black/30 flex justify-center items-center ${open ? '' : 'hidden'}`}>
