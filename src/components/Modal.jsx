@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { formatStatsNames } from "../helpers/formatStatsNames";
 
 export const Modal = ({ open, activePokemon, close }) => {
 
@@ -41,8 +42,8 @@ export const Modal = ({ open, activePokemon, close }) => {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis type="number"/>
-            <YAxis dataKey="name" type="category"/>
-            <Tooltip />
+            <YAxis dataKey="name" tickFormatter={formatStatsNames} type="category"/>
+            <Tooltip labelFormatter={formatStatsNames} />
             <Bar dataKey="base" fill="#8884d8" />
           </BarChart>
         </ResponsiveContainer>
