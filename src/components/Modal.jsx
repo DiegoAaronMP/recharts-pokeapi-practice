@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { ResponsiveContainer } from "recharts";
 import { PokeBarChart } from "./charts/PokeBarChart";
+import { PokeRadarChart } from "./charts/PokeRadarChart";
 
 export const Modal = ({ open, activePokemon, close }) => {
 
@@ -46,8 +47,14 @@ export const Modal = ({ open, activePokemon, close }) => {
             {/* <PokeBarChart stats={activePokemon.stats} /> */}
 
             {/* Para que se renderice, se debe de usar el componente como si fuese una función */}
+            {/* Gráfica de barras */}
             {
-              PokeBarChart(activePokemon.stats)
+              // PokeBarChart(activePokemon.stats)
+            }
+
+            {/* Gráfica de Radar */}
+            {
+              PokeRadarChart(activePokemon.stats)
             }
           </ResponsiveContainer>
         </div>
