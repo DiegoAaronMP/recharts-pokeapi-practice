@@ -1,8 +1,11 @@
-import { useEffect } from "react";
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { formatStatsNames } from "../helpers/formatStatsNames";
+import { useEffect, useState } from "react";
+import { ResponsiveContainer } from "recharts";
+import { PokeBarChart } from "./charts/PokeBarChart";
+import { PokeRadarChart } from "./charts/PokeRadarChart";
 
 export const Modal = ({ open, activePokemon, close }) => {
+
+  const [selectedChart, setSelectedChart] = useState('bar');
 
   // Cerrar el modal cuando se presiona la tecla Esc
   useEffect(() => {
@@ -42,19 +45,39 @@ export const Modal = ({ open, activePokemon, close }) => {
 
           {/* Gráfica de barras */}
           <ResponsiveContainer width={'100%'} height={300} >
-            <BarChart
-              data={activePokemon.stats}
-              layout="vertical"
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis type="number" />
-              <YAxis dataKey="name" tickFormatter={formatStatsNames} type="category" />
-              <Tooltip labelFormatter={formatStatsNames} />
-              <Bar dataKey="base" fill="#205781" />
-            </BarChart>
+            {/* Por alguna razón no es posible renderizar la gráfica como en la siguiente línea */}
+            {/* <PokeBarChart stats={activePokemon.stats} /> */}
+
+            {/* Para que se renderice, se debe de usar el componente como si fuese una función */}
+            {/* Gráfica de barras */}
+            {
+              selectedChart === 'bar' && PokeBarChart(activePokemon.stats)
+            }
+
+            {/* Gráfica de Radar */}
+            {
+              selectedChart === 'radar' && PokeRadarChart(activePokemon.stats)
+            }
           </ResponsiveContainer>
         </div>
 
+        {/* Contenedor para los botones */}
+        <div className="flex gap-2">
+          <button 
+            className={`bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900 ${selectedChart === 'bar' ? 'opacity-85' : ''}`}
+            onClick={() => setSelectedChart('bar')}
+            disabled={selectedChart === 'bar'}
+          >
+            Bar Chart
+          </button>
+          <button 
+            className={`bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900 ${selectedChart === 'radar' ? 'opacity-85' : ''}`}
+            onClick={() => setSelectedChart('radar')}
+            disabled={selectedChart === 'radar'}
+          >
+            Radar Chart
+          </button>
+        </div>
       </div>
     </div>
   )
