@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ResponsiveContainer } from "recharts";
 import { PokeBarChart } from "./charts/PokeBarChart";
 import { PokeRadarChart } from "./charts/PokeRadarChart";
 
 export const Modal = ({ open, activePokemon, close }) => {
+
+  const [selectedChart, setSelectedChart] = useState('bar');
 
   // Cerrar el modal cuando se presiona la tecla Esc
   useEffect(() => {
@@ -49,22 +51,28 @@ export const Modal = ({ open, activePokemon, close }) => {
             {/* Para que se renderice, se debe de usar el componente como si fuese una función */}
             {/* Gráfica de barras */}
             {
-              // PokeBarChart(activePokemon.stats)
+              selectedChart === 'bar' && PokeBarChart(activePokemon.stats)
             }
 
             {/* Gráfica de Radar */}
             {
-              PokeRadarChart(activePokemon.stats)
+              selectedChart === 'radar' && PokeRadarChart(activePokemon.stats)
             }
           </ResponsiveContainer>
         </div>
 
         {/* Contenedor para los botones */}
         <div className="flex gap-2">
-          <button className="bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900">
+          <button 
+            className="bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900"
+            onClick={() => setSelectedChart('bar')}
+          >
             Bar Chart
           </button>
-          <button className="bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900">
+          <button 
+            className="bg-blue-700 py-2 px-4 text-white rounded-md shadow-md hover:bg-blue-800 focus:ring-4 focus:ring-blue-900"
+            onClick={() => setSelectedChart('radar')}
+          >
             Radar Chart
           </button>
         </div>
