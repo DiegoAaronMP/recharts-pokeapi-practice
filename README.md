@@ -10,8 +10,6 @@ Crear una aplicación interactiva que muestre estadísticas y datos visuales de 
 
 ### Interfaz de Usuario  
 - Una página principal que liste los Pokémon con sus nombres e imágenes.  
-- Un filtro de búsqueda para encontrar Pokémon por nombre o ID.  
-- Una sección de detalles que muestre información ampliada al seleccionar un Pokémon (como peso, altura, tipos, y estadísticas base).  
 
 ### Gráficos Interactivos  
 - Un gráfico de barras que represente las estadísticas base (HP, Ataque, Defensa, etc.) de un Pokémon seleccionado.  
@@ -19,7 +17,6 @@ Crear una aplicación interactiva que muestre estadísticas y datos visuales de 
 
 ### Conexión con la API  
 - Consumir datos de la PokeAPI.  
-- Optimizar el uso de las llamadas a la API mediante cacheo o prefetching.  
 
 ## 4. Requerimientos Técnicos  
 
@@ -38,15 +35,14 @@ Crear una aplicación interactiva que muestre estadísticas y datos visuales de 
 
 ### Página Principal (Home)  
 - Mostrar una lista de Pokémon con su nombre, imagen y un botón para ver más detalles.  
-- Incluir un buscador para filtrar Pokémon por nombre o número de la Pokédex.  
 - Agregar un sistema de paginación o scroll infinito para cargar más Pokémon dinámicamente desde la API.  
 
 ### Página de Detalle (Detail)  
 - Mostrar información específica del Pokémon seleccionado:  
-  - Nombre, imagen, número de la Pokédex, tipos, habilidades, peso y altura.  
+  - Nombre, imagen, número de la Pokédex.
   - Estadísticas base representadas mediante gráficos interactivos (gráfico de barras o radar).  
 - Opción para regresar a la página principal.  
-- Implementar manejo de errores si el Pokémon solicitado no existe.  
+- Implementar manejo de errores si el Pokémon solicitado no existe. 
 
 ## 6. Diseño de Componentes  
 
@@ -62,22 +58,13 @@ Crear una aplicación interactiva que muestre estadísticas y datos visuales de 
 ## 7. Gestión de Datos  
 
 ### Obtención de Datos de la API  
-- Usar una librería como Axios o Fetch para realizar las llamadas a la PokeAPI.  
+- Usar fetch para realizar las llamadas a la PokeAPI.  
 - Implementar funciones para:  
   - Obtener la lista de Pokémon (paginada).  
   - Obtener detalles de un Pokémon específico.  
-- Manejo de errores: Mostrar mensajes amigables si no se encuentran datos o si ocurre un problema con la API.  
-
-### Optimización  
-- Cachear resultados de llamadas frecuentes (ejemplo: detalles de Pokémon).  
-- Reducir el número de solicitudes usando paginación en la lista principal.  
 
 ## 8. Detalles Visuales  
-
-### Colores y Tipografía  
-- Usar colores temáticos basados en los tipos de Pokémon (fuego, agua, eléctrico, etc.).  
-- Tipografía moderna y legible como Inter, Roboto o Poppins.  
-
+  
 ### Diseño Responsivo  
 - Asegurarte de que el diseño funcione bien en dispositivos móviles y pantallas grandes.  
 - Usar un diseño limpio con contenedores y márgenes bien definidos.  
